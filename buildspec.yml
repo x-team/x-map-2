@@ -1,0 +1,13 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      # Add build commands here
+      - echo Entered the build phase...
+      # Creating dummy dist folder
+      - mkdir dist
+      - cp index.html dist/index.html
+  post_build:
+    commands:
+      - aws s3 sync ./dist s3://x-map-2-prod/ --delete
