@@ -9,7 +9,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "js/[name].js",
-    // publicPath: path.resolve(__dirname, "src/static")
   },
   devServer: {
     contentBase: path.resolve(__dirname, "dist"),
