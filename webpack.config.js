@@ -9,7 +9,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "js/[name].js",
-    // publicPath: path.resolve(__dirname, "src/static")
   },
   devServer: {
     contentBase: path.resolve(__dirname, "dist"),
@@ -20,6 +19,9 @@ module.exports = {
       template: "./src/index.html",
       filename: "./index.html"
     }),
+    new CopyWebpackPlugin([
+      { from: 'src/static/*', to: 'static', flatten: true }
+    ])
   ],
   module: {
     rules: [
