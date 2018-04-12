@@ -43,8 +43,6 @@ const people = [
   { id: 7, name: "Tina	Griffin", coordinates: [121.4737,31.2304] },
 ]
 
-import World from '../../static/world.json';
-
 const { show, hide } = actions
 
 class Map extends Component {
@@ -157,7 +155,7 @@ class Map extends Component {
               height: "auto",
             }}>
             <ZoomableGroup center={[x,y]} zoom={zoom}>
-            <Geographies geography={World}>
+            <Geographies geography="/static/world.json">
             {(geographies, projection) =>
               geographies.map((geography, i) => (
                 <Geography
