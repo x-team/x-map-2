@@ -14,9 +14,7 @@ module.exports = {
     contentBase: path.resolve(__dirname, "dist"),
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], {
-      exclude:  ['.gitkeep']
-    }),
+    new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       filename: "./index.html"
