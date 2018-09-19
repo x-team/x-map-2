@@ -61,7 +61,16 @@ class Map extends Component {
     this.handleReset = this.handleReset.bind(this)
     this.handlePersonHover = this.handlePersonHover.bind(this)
     this.handlePersonHoverOut = this.handlePersonHoverOut.bind(this)
+    this.handleWheel=this.handleWheel.bind(this);
   }
+  handleWheel(scroll) {
+        console.log(scroll);
+        if (scroll.deltaY > 0) {
+            this.handleZoomOut();
+        } else if (scroll.deltaY < 0) {
+            this.handleZoomIn();
+        }
+    }
   handleZoomIn() {
     this.setState({
       zoom: this.state.zoom * 2,
@@ -119,7 +128,7 @@ class Map extends Component {
 
   render() {
     return (
-      <div style={wrapperStyles}>
+      <div style={wrapperStyles} onWheel={this.handleWheel}>
         <div>
           { people.map((person, i) => (
             <div style={{
