@@ -7,4 +7,5 @@
 NOTE: make sure the sources are compilable to the dist directory which is deployed to AWS S3
 
 ## Development
-run `npm start` and visit `http://localhost:8081/`
+
+run `yarn dev` and visit `http://localhost:3000/`
