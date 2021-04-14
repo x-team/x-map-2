@@ -1,12 +1,7 @@
 {
   "name": "x-map-2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Location of X-Teamers in the world",
-  "main": "src",
-  "scripts": {
-    "start": "webpack-dev-server",
-    "build": "webpack"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/x-team/x-map-2.git"
@@ -16,29 +11,171 @@
   "bugs": {
     "url": "https://github.com/x-team/x-map-2/issues"
   },
-  "homepage": "https://github.com/x-team/x-map-2#readme",
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "clean-webpack-plugin": "^0.1.19",
-    "copy-webpack-plugin": "^4.5.1",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
-    "prop-types": "^15.6.1",
-    "webpack": "^4.5.0",
-    "webpack-cli": "^2.0.14",
-    "webpack-dev-server": "^3.1.3"
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export",
+    "type-check": "tsc --pretty --noEmit",
+    "format": "prettier --write src",
+    "lint": "eslint src --ext ts --ext tsx --ext js",
+    "test": "jest",
+    "test-all": "yarn lint && yarn type-check && yarn test"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn type-check && yarn lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS -x "
+    }
+  },
+  "lint-staged": {
+    "*.@(json)": [
+      "yarn format"
+    ],
+    "*.@(js|jsx|ts|tsx)": [
+      "yarn lint",
+      "yarn format",
+      "yarn test"
+    ]
   },
   "dependencies": {
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
+    "next": "latest",
+    "next-redux-wrapper": "^6.0.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-motion": "^0.5.2",
-    "react-redux": "^5.0.7",
-    "react-simple-maps": "^0.12.0",
-    "redux": "^3.7.2",
-    "redux-tooltip": "^0.7.2"
+    "react-redux": "^7.2.3",
+    "react-simple-maps": "^2.3.0",
+    "redux": "^4.0.5",
+    "redux-tooltip": "^0.7.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/core": "^12.1.1",
+    "@testing-library/react": "^11.2.5",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.25",
+    "@types/react": "^17.0.1",
+    "@types/react-motion": "^0.0.29",
+    "@types/react-redux": "^7.1.16",
+    "@types/react-simple-maps": "^1.0.3",
+    "@typescript-eslint/eslint-plugin": "^4.14.2",
+    "@typescript-eslint/parser": "^4.14.2",
+    "babel-jest": "^26.6.3",
+    "commitlint-config-gitmoji": "^2.2.3",
+    "eslint": "^7.19.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-react": "^7.19.0",
+    "husky": "^4.2.3",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.6.3",
+    "jest-fetch-mock": "^3.0.3",
+    "jest-watch-typeahead": "^0.6.1",
+    "lint-staged": "^10.0.10",
+    "prettier": "^2.0.2",
+    "typescript": "^4.1.3"
+  },
+  "commitlint": {
+    "extends": [
+      "gitmoji"
+    ],
+    "rules": {
+      "type-empty": [
+        0
+      ],
+      "subject-case": [
+        0
+      ]
+    }
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier"
+    ],
+    "env": {
+      "es6": true,
+      "browser": true,
+      "jest": true,
+      "node": true
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "rules": {
+      "react/react-in-jsx-scope": 0,
+      "react/display-name": 0,
+      "react/prop-types": 0,
+      "@typescript-eslint/explicit-function-return-type": 0,
+      "@typescript-eslint/explicit-return-type": 0,
+      "@typescript-eslint/explicit-member-accessibility": 0,
+      "@typescript-eslint/indent": 0,
+      "@typescript-eslint/member-delimiter-style": 0,
+      "@typescript-eslint/no-explicit-any": 0,
+      "@typescript-eslint/no-var-requires": 0,
+      "@typescript-eslint/no-use-before-define": 0,
+      "@typescript-eslint/no-unused-vars": [
+        2,
+        {
+          "argsIgnorePattern": "^_"
+        }
+      ],
+      "no-console": [
+        2,
+        {
+          "allow": [
+            "warn",
+            "error"
+          ]
+        }
+      ]
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "babel": {
+    "presets": [
+      "next/babel"
+    ]
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json",
+      "jsx"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>[/\\\\](node_modules|.next)[/\\\\]"
+    ],
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "babel-jest"
+    },
+    "watchPlugins": [
+      "jest-watch-typeahead/filename",
+      "jest-watch-typeahead/testname"
+    ],
+    "moduleNameMapper": {
+      "src/(.*)": "<rootDir>/src/$1",
+      "\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/test/__mocks__/fileMock.js"
+    }
   }
 }

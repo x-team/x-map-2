@@ -3,8 +3,9 @@ version: 0.2
 phases:
   build:
     commands:
-      - npm install
-      - npm run build
+      - yarn
+      - yarn build
+      - yarn export
   post_build:
     commands:
-      - aws s3 sync ./dist s3://x-map-2-prod/ --delete
+      - aws s3 sync ./out s3://x-map-2-prod/ --delete
